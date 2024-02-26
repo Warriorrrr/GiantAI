@@ -20,7 +20,7 @@ public class GiantAttackTurtleEggGoal extends RemoveBlockGoal {
 
     @Override
     public void playDestroyProgressSound(final LevelAccessor world, final @NotNull BlockPos pos) {
-        world.playSound(null, pos, SoundEvents.ZOMBIE_DESTROY_EGG, SoundSource.HOSTILE, 0.5F, 0.9F + mob.random.nextFloat() * 0.2F);
+        world.playSound(null, pos, SoundEvents.ZOMBIE_DESTROY_EGG, SoundSource.HOSTILE, 0.5F, 0.9F + mob.getRandom().nextFloat() * 0.2F);
     }
 
     @Override
