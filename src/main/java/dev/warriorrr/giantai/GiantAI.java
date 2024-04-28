@@ -14,7 +14,7 @@ import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import org.bukkit.craftbukkit.v1_20_R3.entity.CraftGiant;
+import org.bukkit.craftbukkit.entity.CraftGiant;
 import org.bukkit.entity.Giant;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
