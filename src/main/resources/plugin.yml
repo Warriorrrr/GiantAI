@@ -3,3 +3,4 @@ version: '${version}'
 main: dev.warriorrr.giantai.GiantAI
 api-version: '1.20.5'
 folia-supported: true
+load: STARTUP
