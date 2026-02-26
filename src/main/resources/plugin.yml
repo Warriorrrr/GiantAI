@@ -1,6 +1,6 @@
 name: GiantAI
 version: '${version}'
 main: dev.warriorrr.giantai.GiantAI
-api-version: '1.21.1'
+api-version: '1.21.11'
 folia-supported: true
 load: STARTUP

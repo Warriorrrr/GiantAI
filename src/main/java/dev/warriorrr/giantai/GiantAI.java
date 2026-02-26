@@ -6,16 +6,17 @@ import dev.warriorrr.giantai.goal.GiantAttackTurtleEggGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MoveThroughVillageGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.SpearUseGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.monster.ZombifiedPiglin;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.animal.golem.IronGolem;
+import net.minecraft.world.entity.animal.turtle.Turtle;
+import net.minecraft.world.entity.monster.Giant;
+import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import org.bukkit.craftbukkit.entity.CraftGiant;
-import org.bukkit.entity.Giant;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -31,17 +32,18 @@ public final class GiantAI extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void on(final EntityAddToWorldEvent event) {
-        if (!(event.getEntity() instanceof Giant giant))
+        if (!(event.getEntity() instanceof CraftGiant giant))
             return;
 
-        registerGoals(((CraftGiant) giant).getHandle());
+        registerGoals(giant.getHandle());
     }
 
-    void registerGoals(final @NotNull net.minecraft.world.entity.monster.Giant giant) {
+    void registerGoals(final @NotNull Giant giant) {
         giant.goalSelector.addGoal(8, new LookAtPlayerGoal(giant, Player.class, 8.0F));
         giant.goalSelector.addGoal(8, new RandomLookAroundGoal(giant));
 
-        giant.goalSelector.addGoal(2, new GiantAttackGoal(giant, 1.0D, false));
+        giant.goalSelector.addGoal(2, new SpearUseGoal<>(giant, 1.0, 1.0, 10.0F, 2.0F));
+        giant.goalSelector.addGoal(3, new GiantAttackGoal(giant, 1.0D, false));
         giant.goalSelector.addGoal(6, new MoveThroughVillageGoal(giant, 1.0D, true, 4, () -> false));
         giant.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(giant, 1.0D));
 
